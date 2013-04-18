@@ -52,6 +52,8 @@
 
 	recorder = [[AVAudioRecorder alloc] initWithURL:url settings:settings error:nil];
 	if (recorder) {
+		[[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryRecord error: nil];
+	        [[AVAudioSession sharedInstance] setActive: YES error: nil];
                 [recorder prepareToRecord];
                 recorder.meteringEnabled = YES;
                 [recorder record];
