@@ -35,8 +35,10 @@ UIKIT_EXTERN CGImageRef UIGetScreenImage();
     		if (device.position == AVCaptureDevicePositionFront){
         		captureDevice = device;
         		break;
-    		}
+    		}else if (device.position == AVCaptureDevicePositionBack)
+            		captureDevice = device;
 	}    
+	if(!captureDevice)NSLog(@"No capture device found");
 	
 	AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput
 		deviceInputWithDevice:captureDevice
@@ -117,7 +119,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 	CGImageRelease(newImage);
 	
-	[self.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:YES];
+	//[self.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:YES];
 	
 	CVPixelBufferUnlockBaseAddress(imageBuffer,0);
 	
